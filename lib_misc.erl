@@ -1,6 +1,6 @@
 
 -module(lib_misc).
--export([odds_and_evens1/1, odds_and_evens2/1, my_tuple_to_list/1]).
+-export([odds_and_evens1/1, odds_and_evens2/1, my_tuple_to_list/1, my_time_func/1]).
 
 odds_and_evens1(L) ->
   Odds  = [X || X <- L, (X rem 2) =:= 1],
@@ -25,3 +25,8 @@ my_tuple_to_list(T) ->
 my_tupple_to_list_acc(_, 0, Acc) -> Acc;
 my_tupple_to_list_acc(T, N, Acc) ->
   my_tupple_to_list_acc(T, N-1, [element(N, T) | Acc]).
+
+my_time_func(F) ->
+  Start = now(),
+  F(),
+  timer:now_diff(now(), Start).
