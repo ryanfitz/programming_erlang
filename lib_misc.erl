@@ -1,6 +1,6 @@
 
 -module(lib_misc).
--export([odds_and_evens1/1, odds_and_evens2/1]).
+-export([odds_and_evens1/1, odds_and_evens2/1, my_tuple_to_list/1]).
 
 odds_and_evens1(L) ->
   Odds  = [X || X <- L, (X rem 2) =:= 1],
@@ -19,3 +19,9 @@ odds_and_evens_acc([H|T], Odds, Evens) ->
 odds_and_evens_acc([], Odds, Evens) ->
   {lists:reverse(Odds), lists:reverse(Evens)}.
 
+my_tuple_to_list(T) ->
+  my_tupple_to_list_acc(T, size(T), []).
+
+my_tupple_to_list_acc(_, 0, Acc) -> Acc;
+my_tupple_to_list_acc(T, N, Acc) ->
+  my_tupple_to_list_acc(T, N-1, [element(N, T) | Acc]).
