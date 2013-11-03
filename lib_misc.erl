@@ -1,6 +1,6 @@
 
 -module(lib_misc).
--export([odds_and_evens1/1, odds_and_evens2/1, my_tuple_to_list/1, my_time_func/1]).
+-export([odds_and_evens1/1, odds_and_evens2/1, my_tuple_to_list/1, my_time_func/1, my_date_string/0]).
 
 odds_and_evens1(L) ->
   Odds  = [X || X <- L, (X rem 2) =:= 1],
@@ -30,3 +30,7 @@ my_time_func(F) ->
   Start = now(),
   F(),
   timer:now_diff(now(), Start).
+
+my_date_string() ->
+  Data = lists:append(tuple_to_list(date()), tuple_to_list(time())),
+  io:format("Datetime: ~w/~w/~w ~w:~w:~w ~n", Data).
